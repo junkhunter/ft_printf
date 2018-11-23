@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 21:43:32 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/22 22:38:16 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/23 01:56:03 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int main(int argc, char **argv)
 	printf("\nprintf ->%lx\n le mien\n", ~(unsigned long)0);
 	upper_hexa_converter(~(unsigned long)0);
 	printf("\nprintf ->%lX\n", ~(unsigned long)0);*/
-	if (argc >= 3)
-		ft_printf(argv[1] ,(ft_atoi(argv[2])) ? (ft_atoi(argv[2])) : (argv[2]));
+	//if (argc >= 3)
+	//	ft_printf(argv[1] ,(ft_atoi(argv[2])) ? (ft_atoi(argv[2])) : (argv[2]));
+	ft_printf("%X" , 0);
 	//printf ("%b\n",1);
 	return(0);
 }

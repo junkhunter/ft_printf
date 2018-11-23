@@ -6,7 +6,7 @@
 #    By: rhunders <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 20:45:42 by rhunders          #+#    #+#              #
-#    Updated: 2018/11/22 21:54:05 by rhunders         ###   ########.fr        #
+#    Updated: 2018/11/23 01:51:37 by rhunders         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,26 +14,29 @@ SRC	=	ft_printf.c \
 		ft_printf_display.c \
 		ft_printf_flagfunctions.c \
 		ft_printf_flagfunctions_second.c \
+		converter_flagfunctions_long.c \
 		converter_flagfunctions.c
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	ft_printf
+NAME	=	libftprintf.a
 
-all:
-	@make re -C libft/
-	@gcc -Wall -Wextra -Werror -c $(SRC) libft/libft.a -I libft/include -I include/
-	@gcc $(OBJ) -o $(NAME)
-	@echo "-COMPILATION DONE-"
+$(NAME):
+	make re -C libft/
+	gcc -Wall -Wextra -Werror -c $(SRC) libft/*.c -I libft/include/ -I include/
+	ar rc libftprintf.a *.o libft/*.o
+	echo "-COMPILATION DONE-"
 
-$(NAME) : all
+all : $(NAME)
 
 clean:
-	@rm -f $(OBJ)
-	@echo "-CLEANED-"
+	rm -f $(OBJ)
+	make clean -C libft/
+	echo "-CLEANED-"
 
 fclean:	clean
-	@rm -f $(NAME)
-	@echo "-FCLEANED-"
+	rm -f $(NAME) $(OBJ)
+	make fclean -C libft/
+	echo "-FCLEANED-"
 
 re:	fclean all

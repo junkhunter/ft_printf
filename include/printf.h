@@ -6,14 +6,13 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:54:02 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/21 00:02:09 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/23 01:49:47 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
 # define NUMBER_OF_FLAG 14
-
 #include "libft.h"
 
 typedef struct	s_flag_array
