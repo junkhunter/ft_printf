@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:54:02 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/23 01:49:47 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/23 16:14:17 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,20 @@ typedef struct	s_flag_array
     void (*flagFunction)();
 }				t_flag_array;
 
-int ft_printf(char *firstArg, ...);
+typedef struct	s_conv
+{
+	int	sharp;
+	int	space;
+	int zero;
+	int	minus;
+	int plus;
+	int width;
+	int	precision;
+	int size;
+	int	index;
+}				t_conv;
+
+int ft_printf(char *arg, ...);
 t_flag_array *create_flag_array(void);
 int special_case_check (char *arg, int index);
 void ft_put_octal(int nb);
