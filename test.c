@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 21:43:32 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 05:01:12 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 17:48:20 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 	printf("\nprintf ->%lX\n", ~(unsigned long)0);*/
 	//if (argc >= 3)
 	//	ft_printf(argv[1] ,(ft_atoi(argv[2])) ? (ft_atoi(argv[2])) : (argv[2]));
-	printf("%u\n", 33);
+	printf("%0+8u\n", 100);
 	//ft_putnbr(33);
 	//printf ("%b\n",1);
 	return(0);
