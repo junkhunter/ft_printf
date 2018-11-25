@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:26:24 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 17:51:04 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 20:53:17 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int     ft_bigger(int val1, int val2)
 	return ((val1 > val2) ? val1 : val2);
 }
 
-void    ft_width_di(int size_input, t_conv conv)
+void    ft_width(int size_input, t_conv conv)
 {
 	char c;
 

@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:53:47 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/22 22:34:09 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 23:39:17 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,19 @@
 #include <stdlib.h>
 #include <limits.h>
 
-size_t	nb_len(int nb, int base)
-{
-	int i;
-
-	i = 0;
-	while (nb >= base)
-	{
-		nb /= base;
-		i++;
-	}
-	return (i);
-}
-
 void	binary_converter(int input)
 {
 	int i;
 
-	i = 32;
+	i = 64;
 	while (i-- > 0)
 	{
-		if (!((i + 1) % 8) && i < 31)
+		if (!((i + 1) % 8) && i < 63)
 			ft_putchar(' ');
 		ft_putchar((input & (1 << i)) ? '1' : '0');
 	}
 }
-
+/*
 void	u_octal_converter(unsigned long input)
 {
 	if (input >= 8)
@@ -98,4 +85,4 @@ void	upper_hexa_converter(unsigned long input)
 	ft_putstr(result);
 	free(result);
 	free(strbase);
-}
+}*/

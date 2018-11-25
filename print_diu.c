@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 04:14:51 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 18:02:40 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 20:53:09 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int print_di(va_list ap, t_conv conv)
 		ft_putchar(' ');
 	if (conv.minus)
 		ft_putnbrl(nb, conv.precision, conv.plus);
-	ft_width_di(ret, conv);
+	ft_width(ret, conv);
 	if (!conv.minus)
 		ft_putnbrl(nb, conv.precision, conv.plus);
 	return (ft_bigger(ret, conv.width));
@@ -66,7 +66,7 @@ int	print_u(va_list ap, t_conv conv)
 	ret = ft_bigger(nb_ulen(nb, 10), conv.precision);
 	if (conv.minus)
 		ft_putnbrlu(nb, conv.precision);
-	ft_width_di(ret, conv);
+	ft_width(ret, conv);
 	if (!conv.minus)
 		ft_putnbrlu(nb, conv.precision);
 	return (ft_bigger(ret, conv.width));

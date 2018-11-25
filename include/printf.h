@@ -6,13 +6,13 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:54:02 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 17:50:59 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 23:41:41 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
-# define NUMBER_OF_FLAG 12
+# define NUMBER_OF_FLAG 10
 # define HH 1
 # define H  2
 # define LL 3
@@ -37,11 +37,11 @@ typedef struct	s_conv
 typedef struct	s_flag_array
 {
     char		flagChar;
-    int 		(*flagFunction[12])(va_list, t_conv);
+    int 		(*function)(va_list, t_conv);
 }				t_flag_array;
 
 int				ft_printf(const char *arg, ...);
-int				printf_recurs(char *arg, ...);
+int             printf_recurs(char *arg, va_list ap, t_flag_array *flag_array);
 t_flag_array	*create_flag_array(void);
 
 /* print */
@@ -55,12 +55,16 @@ int				print_x_low(va_list ap, t_conv conv);
 int				print_x_up(va_list ap, t_conv conv);
 int				print_u(va_list ap, t_conv conv);
 int				print_p(va_list ap, t_conv conv);
+void			ft_putnbrlu_base(unsigned long nb, int precision, char *digit, int base);
+void			binary_converter(int input);
 
 /* outils */
 int     ft_bigger(int val1, int val2);
-void    ft_width_di(int size_input, t_conv conv);
+void    ft_width(int size_input, t_conv conv);
 long    ft_abs(long nb);
 int		nb_len(long nb, int base);
+int     nb_ulen(unsigned long nb, int base);
+
 
 /* va_arg */
 long			va_arg_di(va_list ap, t_conv conv);

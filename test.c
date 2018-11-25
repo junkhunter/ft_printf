@@ -6,17 +6,17 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 21:43:32 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 17:48:20 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 23:08:50 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/printf.h"
 #include <limits.h>
 #include <stdio.h>
-
+#include <float.h>
 int main(int argc, char **argv)
 {
-	//char str[] = "bonjour !\n";
+	char str[] = "bonjour !\n";
 	/*printf ("le mien ->\n");
 	octal_converter(~(unsigned long)0);
 	printf("\nprintf ->\n%lo\n le mien ->\n", ~(unsigned long)0);
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 	printf("\nprintf ->%lX\n", ~(unsigned long)0);*/
 	//if (argc >= 3)
 	//	ft_printf(argv[1] ,(ft_atoi(argv[2])) ? (ft_atoi(argv[2])) : (argv[2]));
-	printf("%0+8u\n", 100);
+	printf("%20.50p", str);
 	//ft_putnbr(33);
 	//printf ("%b\n",1);
 	return(0);

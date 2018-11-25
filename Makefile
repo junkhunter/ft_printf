@@ -6,7 +6,7 @@
 #    By: rhunders <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 20:45:42 by rhunders          #+#    #+#              #
-#    Updated: 2018/11/23 14:21:29 by rhunders         ###   ########.fr        #
+#    Updated: 2018/11/26 00:21:36 by rhunders         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 LIBFT = libft/ft_atoi.c libft/ft_bzero.c libft/ft_isalnum.c \
@@ -49,11 +49,12 @@ LIBFT_SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_tabclear.c ft_lstclear.c
 
 SRC	=	ft_printf.c \
-		ft_printf_display.c \
-		ft_printf_flagfunctions.c \
-		ft_printf_flagfunctions_second.c \
-		converter_flagfunctions_long.c \
-		converter_flagfunctions.c
+		ft_select_arg.c \
+		outil.c \
+		print_diu.c \
+		print_ox.c \
+		print_sbc.c \
+		converter_flagfunctions.c 
 
 OBJ	= $(SRC:.c=.o) $(LIBFT_SRC:.c=.o)
 
