@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 04:14:51 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 17:50:43 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 18:02:40 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void    ft_putnbrl(long nb, int precision, int plus)
 	ft_putchar('0' + nb % 10);
 }
 
-/*int print_di(va_list ap, t_conv conv)
+int print_di(va_list ap, t_conv conv)
 {
 	long nb;
 	int ret;
@@ -46,7 +46,7 @@ void    ft_putnbrl(long nb, int precision, int plus)
 	if (!conv.minus)
 		ft_putnbrl(nb, conv.precision, conv.plus);
 	return (ft_bigger(ret, conv.width));
-}*/
+}
 
 void    ft_putnbrlu(unsigned long nb, int precision)
 {
@@ -57,12 +57,12 @@ void    ft_putnbrlu(unsigned long nb, int precision)
 	ft_putchar('0' + nb % 10);
 }
 
-int	print_u(unsigned long nb/*va_list ap*/, t_conv conv)
+int	print_u(va_list ap, t_conv conv)
 {
-	//unsigned long nb;
+	unsigned long nb;
 	int ret;
 
-	//nb = va_arg_oux(ap, conv);
+	nb = va_arg_oux(ap, conv);
 	ret = ft_bigger(nb_ulen(nb, 10), conv.precision);
 	if (conv.minus)
 		ft_putnbrlu(nb, conv.precision);
@@ -71,7 +71,7 @@ int	print_u(unsigned long nb/*va_list ap*/, t_conv conv)
 		ft_putnbrlu(nb, conv.precision);
 	return (ft_bigger(ret, conv.width));
 }
-
+/*
 #include <limits.h>
 
 int	main()
@@ -87,4 +87,4 @@ int	main()
 
 	printf("\nret = %d\n", print_u(100, conv));
 	return (1);
-}
+}*/
