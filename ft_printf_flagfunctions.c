@@ -6,36 +6,60 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:11:31 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/22 22:17:56 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/25 02:20:18 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/printf.h"
 #include <stdlib.h>
 
-void print_int(int input)
+int	ft_option_di(long nb, t_conv conv)
 {
-	ft_putnbr(input);
+	int ret;
+	int prec;
+	int width;
+
+	ret = 0;
+	if (nb_len(nb, 10) < conv.precision)
+	{
+		prec = conv.precision;
+		conv.precision = 0;
+		ft_option_di(nb, conv);
+	}
 }
 
-void print_char(int input)
+int print_di(va_list ap, t_conv conv)
 {
-	ft_putchar(input);
+	long nb;
+	int ret;
+
+	nb = va_arg_di(ap, conv);
+	ret = 0;
+	if (nb_len(nb, 10) < conv.precision)
+	{
+		
+	}
+	return ();
 }
 
-void print_string(char *input)
+int print_c(va_list ap, t_conv conv)
 {
-	ft_putstr(input);
+	
 }
 
-void print_unsigned_int(unsigned int input)
+int print_s(va_list ap, t_conv conv)
+{
+
+}
+
+int print_u(va_list ap, t_conv conv)
 {
 	if (input > 9) 
 		ft_putnbr(input / 10);
 	ft_putchar(input % 10 + 48);
 }
 
-void print_string_and_unprintable(unsigned char *input)
+int print_s_unprintable(va_list ap, t_conv conv)
 {
 	int index;
 	int octalNb;
