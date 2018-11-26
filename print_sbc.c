@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 21:24:12 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 23:37:18 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/26 01:24:20 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 #include "include/printf.h"
 #include "libft.h"
 
+int		ft_smaller(int val1, int val2)
+{
+	return ((val1 < val2) ? val1 : val2);
+}
+
 int	print_s(va_list ap, t_conv conv)
 {
 	char	*str;
 	int		ret;
 
 	str = va_arg(ap, char *);
-	ret = ft_strlen(str);
-	if (conv.minus)
+	ret = (str) ? ft_strlen(str): 6;
+	if (conv.minus && str) // put si ya un moins
 		write(1, str, ft_strlen(str));
+	else if (conv.minus)
+		ft_putstr("(null)");
 	ft_width(ret, conv);
-	if (!conv.minus)
+	if (!conv.minus && str) // put si yavais pas de moins
 		write(1, str, ft_strlen(str));
+	else if (!conv.minus)
+		ft_putstr("(null)");
 	return (ft_bigger(ret, conv.width));
 }
 
@@ -68,6 +77,10 @@ int	print_b(va_list ap, t_conv conv)
 	long nbr;
 
 	nbr = (long)va_arg(ap, void*);
-	binary_converter(nbr);
-	return (64);
+	if (conv.minus)
+		binary_converter(nbr);
+	ft_width(72, conv);
+	if (!conv.minus)
+		binary_converter(nbr);
+	return (ft_bigger(72, conv.width));
 }

@@ -6,7 +6,7 @@
 #    By: rhunders <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 20:45:42 by rhunders          #+#    #+#              #
-#    Updated: 2018/11/26 00:21:36 by rhunders         ###   ########.fr        #
+#    Updated: 2018/11/26 00:22:28 by rhunders         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 LIBFT = libft/ft_atoi.c libft/ft_bzero.c libft/ft_isalnum.c \

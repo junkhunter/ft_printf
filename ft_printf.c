@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:11:52 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/26 00:17:41 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/26 01:13:11 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 #include "include/printf.h"
 #include <unistd.h>
 
-
-#include <stdio.h>
-#include <time.h>
-void	ft_sleep(int time)
+void	error()
 {
-	clock_t tick = clock();
-
-	while (tick + time * CLOCKS_PER_SEC > clock())
-		;
+	ft_putstr("\n*** Invalid_flag ***\n");
+	exit(0);
 }
 
 int		ft_isnum(char c)
@@ -81,13 +76,15 @@ int		check_valid_flag(char **arg, t_conv *conv, t_flag_array *flag_array, int si
 	while (++i < size)
 	{
 		if ((*arg)[i] == '%')
-			return (-i - 1);
+		{
+			create_conv(arg, conv);
+			return (-1);
+		}
 		while (++count < NUMBER_OF_FLAG)
 			if ((*arg)[i] == flag_array[count].flagChar)
 			{
 				conv->index = count;
 				create_conv(arg, conv);
-				//*arg += i + 1;
 				return (1);
 			}
 		count = -1;
@@ -100,11 +97,7 @@ int		ft_ischar_flag(char arg)
 	return (arg && ft_strchr("#. -+0123456789dcsoxXiupfhl", arg));
 }
 
-void	error()
-{
-	ft_putstr("\n*** Invalid_flag ***\n");
-	exit(0);
-}
+
 
 int		search_flag(va_list ap, char **arg, t_flag_array *flag_array)
 {
@@ -113,24 +106,23 @@ int		search_flag(va_list ap, char **arg, t_flag_array *flag_array)
 	t_conv	conv;
 
 	ft_memset((void*)&conv, (size = 0), sizeof(t_conv));
-	while (ft_ischar_flag((*arg)[size]))
+	while (ft_ischar_flag((*arg)[size]) || ((*arg)[size] == '%' && !++size))
 		size++;						 				   // taille du flag au max
-	if ((count = check_valid_flag(arg, &conv, flag_array, size)) != 1)  // met dans conv le type de conversion
+	if ((count = check_valid_flag(arg, &conv, flag_array, size)) == 0)  // met dans conv le type de conversion
 		error();
 	else if (count < 0)
 	{
-		arg += -count;
-		write(1, "%", 1);
-		return (1);
+		write(1, "%", conv.minus);
+		ft_width(1, conv);
+		write(1, "%", !conv.minus);
+		return (ft_bigger(1, conv.width));
 	}
-	//create_conv(arg, &conv);	 			  	    // organisation des info sur les flag
 	return (flag_array[conv.index].function(ap, conv));
 }
 
 int		printf_recurs(char *arg, va_list ap, t_flag_array *flag_array)
 {
 	int		size;
-	int		count;
 	char	*percent;
 
 	percent = NULL;

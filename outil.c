@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:26:24 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 20:53:17 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/26 01:00:11 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void    ft_width(int size_input, t_conv conv)
 {
 	char c;
 
-	c = (!conv.zero) ? ' ' : '0';
+	if (!conv.minus)
+		c = (!conv.zero) ? ' ' : '0';
+	else
+		c = ' ';
 	while (conv.width-- > size_input)
 		ft_putchar(c);
 }
@@ -37,6 +40,8 @@ int nb_len(long nb, int base)
 {
 	int i;
 
+	if (nb == 0)
+		return (1);
 	i = 0;
 	while (ft_abs(nb) > 0)
 	{
@@ -50,6 +55,8 @@ int nb_ulen(unsigned long nb, int base)
 {
 	int i;
 
+	if (nb == 0)
+		return (1);
 	i = 0;
 	while (nb > 0)
 	{
