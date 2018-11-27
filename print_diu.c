@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 04:14:51 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 20:53:09 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/27 20:23:38 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ void    ft_putnbrl(long nb, int precision, int plus)
 	if (nb < 0)
 	{
 		if (nb == LONG_MIN)
-			ft_putstr("-9223372036854775808");
+		{
+			ft_putchar('-');
+			while (precision && precision-- > 19)
+				ft_putchar('0');
+			return (ft_putstr("9223372036854775808"));
+		}
 		nb = nb * -write(1, "-", 1);
 	}
 	else if (plus)
@@ -36,14 +41,25 @@ int print_di(va_list ap, t_conv conv)
 	long nb;
 	int ret;
 
+	(conv.precision == -1) ? conv.precision = 1: 1;
 	nb = va_arg_di(ap, conv);
-	ret = ft_bigger(nb_len(nb, 10), conv.precision) + (nb < 0 || conv.space || conv.plus);
+	ret = (ft_bigger(nb_len(nb, 10), conv.precision) + (nb < 0 || conv.space || conv.plus)) * (!!conv.precision);
+	if ((nb < 0 || conv.space || conv.plus) && conv.zero)
+	{
+		if ((conv.plus && nb >= 0) || conv.space)
+			write(1, (conv.plus) ? "+" : " ", 1);
+		else
+			write(1, "-", 1);
+		conv.plus = 0;
+		conv.space = 0;
+		nb = ft_abs(nb);
+	}
 	if (conv.space > conv.plus && nb >= 0)
 		ft_putchar(' ');
-	if (conv.minus)
+	if (conv.minus && ret)
 		ft_putnbrl(nb, conv.precision, conv.plus);
 	ft_width(ret, conv);
-	if (!conv.minus)
+	if (!conv.minus && ret)
 		ft_putnbrl(nb, conv.precision, conv.plus);
 	return (ft_bigger(ret, conv.width));
 }
@@ -62,6 +78,7 @@ int	print_u(va_list ap, t_conv conv)
 	unsigned long nb;
 	int ret;
 
+	(conv.precision == -1) ? conv.precision = 1: 1;
 	nb = va_arg_oux(ap, conv);
 	ret = ft_bigger(nb_ulen(nb, 10), conv.precision);
 	if (conv.minus)

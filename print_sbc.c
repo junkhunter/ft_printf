@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 21:24:12 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/26 01:24:20 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/27 20:25:23 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,32 @@ int	print_s(va_list ap, t_conv conv)
 {
 	char	*str;
 	int		ret;
+	int		str_len;
+	int		prec;
 
+	(conv.precision == -1) ? conv.precision = 1: 1;
 	str = va_arg(ap, char *);
-	ret = (str) ? ft_strlen(str): 6;
-	if (conv.minus && str) // put si ya un moins
-		write(1, str, ft_strlen(str));
-	else if (conv.minus)
-		ft_putstr("(null)");
+	str_len = (str) ? ft_strlen(str): 0;
+	if (conv.precision == 1)
+	{
+		prec = str_len;
+		ret = (str) ? str_len: 6;
+	}
+	else if (conv.precision < str_len)
+	{
+		prec = conv.precision;
+		ret = (str) ? conv.precision: 6;
+	}
+	else
+	{
+		prec = str_len;
+		ret = (str) ? str_len: 6;
+	}
+	if (conv.minus) // put si ya un moins
+		(str) ? write(1, str, prec) : ft_putstr("(null)");
 	ft_width(ret, conv);
-	if (!conv.minus && str) // put si yavais pas de moins
-		write(1, str, ft_strlen(str));
-	else if (!conv.minus)
-		ft_putstr("(null)");
+	if (!conv.minus) // put si yavais pas de moins
+		(str) ? write(1, str, prec) : ft_putstr("(null)");
 	return (ft_bigger(ret, conv.width));
 }
 
@@ -50,7 +64,8 @@ int	print_c(va_list ap, t_conv conv)
 		write(1, &c, 1);
 	return (ft_bigger(1, conv.width));
 }
-
+#include <stdio.h>
+#include <stdlib.h>
 int	print_p(va_list ap, t_conv conv)
 {
 	unsigned long	ptr;
@@ -64,7 +79,7 @@ int	print_p(va_list ap, t_conv conv)
 		ft_putnbrlu_base(ptr, 0,"0123456789abcdef", 16);
 	}
 	ft_width(ret,conv);
-	if (conv.minus)
+	if (!conv.minus)
 	{
 		write(1, "0x", 2);
 		ft_putnbrlu_base(ptr, 0,"0123456789abcdef", 16);

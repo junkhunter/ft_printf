@@ -6,13 +6,13 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:54:02 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/25 23:41:41 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/27 17:52:53 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
-# define NUMBER_OF_FLAG 10
+# define NUMBER_OF_FLAG 11
 # define HH 1
 # define H  2
 # define LL 3
@@ -55,6 +55,7 @@ int				print_x_low(va_list ap, t_conv conv);
 int				print_x_up(va_list ap, t_conv conv);
 int				print_u(va_list ap, t_conv conv);
 int				print_p(va_list ap, t_conv conv);
+int				print_percent(va_list ap, t_conv conv);
 void			ft_putnbrlu_base(unsigned long nb, int precision, char *digit, int base);
 void			binary_converter(int input);
 

@@ -6,7 +6,7 @@
 #    By: rhunders <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 20:45:42 by rhunders          #+#    #+#              #
-#    Updated: 2018/11/26 00:22:28 by rhunders         ###   ########.fr        #
+#    Updated: 2018/11/27 19:44:30 by rhunders         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 LIBFT = libft/ft_atoi.c libft/ft_bzero.c libft/ft_isalnum.c \
@@ -54,6 +54,7 @@ SRC	=	ft_printf.c \
 		print_diu.c \
 		print_ox.c \
 		print_sbc.c \
+		print_percent.c \
 		converter_flagfunctions.c 
 
 OBJ	= $(SRC:.c=.o) $(LIBFT_SRC:.c=.o)
