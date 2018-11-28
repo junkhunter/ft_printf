@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 21:24:12 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/27 20:25:23 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/28 00:10:29 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,28 @@ int	print_s(va_list ap, t_conv conv)
 	return (ft_bigger(ret, conv.width));
 }
 
+#include <stdio.h>
+#include <stdlib.h>
+
 int	print_c(va_list ap, t_conv conv)
 {
 	char c;
 
 	c = (char)va_arg(ap, int);
+	(conv.precision == -1) ? conv.precision = 1: 1;
 	if (conv.minus)
+	{
 		write(1, &c, 1);
-	ft_width(1,conv);
-	if (!conv.minus)
+		ft_width(1, conv);
+	}
+	else
+	{
+		ft_width(1, conv);
 		write(1, &c, 1);
+	}
 	return (ft_bigger(1, conv.width));
 }
-#include <stdio.h>
-#include <stdlib.h>
+
 int	print_p(va_list ap, t_conv conv)
 {
 	unsigned long	ptr;

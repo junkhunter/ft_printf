@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 04:14:51 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/27 21:10:17 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/11/28 03:17:42 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,36 +36,49 @@ int		float_len(long double nb)
 	return (i);
 }
 
-
-
-
-void    ft_putfloat(long double nb, int precision, int plus, int acc)
+void	print_bit(char nb)
 {
-	int i;
+	char i = 8;
 
-	i = 0;
-	if (plus && nb)
-		ft_putchar('+');
-	if (nb < 1.0 && acc != 1)
-		ft_putchar('0' + (((unsigned long)nb) % 10));
-	else if (acc != 1)
-	{
-		ft_putfloat(nb / 10, 0, 0, 1);
-		ft_putchar('0' + ((unsigned long)nb) % 10);
-		if (acc)
-			return ;
-	}
-	nb -= (unsigned long)nb;
-	while (i < precision)
-	{
-		if (!i)
-			ft_putchar('.');
-		nb *= 10;
-		ft_putchar('0' + (ft_abs((long)nb) % 10));
-		i++;
-	}
+	while (i-- > 0)
+		write(1, (nb & (1 << i) ? "1":"0"), 1);
 }
 
+void    ft_putfloat(void *nb, int precision, int plus)
+{
+	char i = 15;
+
+	while (i-- > 1)
+	{
+		print_bit(((char *)nb)[i]);
+		if (i != 1)
+			write(1, " ",1);
+	}
+	/*short exponent;
+	long fraction;
+	int signe;
+	
+	exponent = ((short*)nb)[1];
+	if (exponent < 0)
+		signe = -1;
+	exponent = ft_abs((long)exponent);
+	print_bit(exponent);
+	//exponent = 0b0111111111110000 & exponent;
+	fraction = ((long*)nb)[1];
+	write(1, " ",1);
+	print_bit(fraction);*/
+}
+
+#include <limits.h>
+#include <float.h>
+
+int main()
+{
+	long double nbr = /*LDBL_MAX*/LDBL_MAX;
+
+	ft_putfloat((void*)&nbr,0,0);
+	return (0);
+}/*
 #include <limits.h>
 #include <float.h>
 int main()
@@ -82,7 +95,7 @@ int main()
 	ft_putfloat(dip,6,0,0);
 	ft_putendl("");
 	return (0);
-}
+}*/
 /*
 #include <stdio.h>
 
