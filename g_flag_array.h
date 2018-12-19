@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   g_flag_array.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/02 18:14:54 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/28 15:52:00 by rhunders         ###   ########.fr       */
+/*   Created: 2018/11/28 15:25:53 by rhunders          #+#    #+#             */
+/*   Updated: 2018/12/18 22:01:23 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef G_FLAG_ARRAY
+# define G_FLAG_ARRAY
+# include "include/printf.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+t_flag_array    flag_array[11] = 
 {
-	unsigned char	*str;
-	size_t			i;
-
-	i = 0;
-	str = (unsigned char*)s;
-	while (i < n)
-		str[i++] = (unsigned char)c;
-	return (str);
-}
+	{'d', print_di},
+	{'c', print_c},
+	{'s', print_s},
+	{'o', print_o},
+	{'i', print_di},
+	{'u', print_u},
+	{'x', print_x_low},
+	{'X', print_x_up},
+	{'p', print_p},
+	{'f', NULL},
+	{'%', print_percent},
+};
+#endif

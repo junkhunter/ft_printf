@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 04:14:51 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/27 20:25:10 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/19 00:35:13 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ int print_percent(va_list ap, t_conv conv)
 
 	(void)ap;
 	(conv.precision == -1) ? conv.precision = 1: 1;
-	conv.precision = (conv.precision) ? conv.precision : 1;
-	ret = conv.precision;
+	ret = 1;
 	if (conv.minus)
-		while (conv.precision-- > 0)
-			write(1, (conv.precision) ? "0": "%", 1);
-	ft_width(ret, conv);
+		write(1, "%", 1);
+	if (conv.width)
+		ft_width(ret, &conv);
 	if (!conv.minus)
-		while (conv.precision-- > 0)
-			write(1, (conv.precision) ? "0": "%", 1);
+		write(1, "%", 1);
 	return (ft_bigger(ret, conv.width));
 }
 /*

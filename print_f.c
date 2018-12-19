@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 04:14:51 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/28 03:17:42 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/14 00:17:52 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,37 @@ void	print_bit(char nb)
 		write(1, (nb & (1 << i) ? "1":"0"), 1);
 }
 
-void    ft_putfloat(void *nb, int precision, int plus)
+void    ft_putlong(long nb)
 {
-	char i = 15;
-
-	while (i-- > 1)
+	if (nb < 0)
 	{
-		print_bit(((char *)nb)[i]);
-		if (i != 1)
-			write(1, " ",1);
+		if (nb == LONG_MIN)
+		{
+			ft_putchar('-');
+			return (ft_putstr("9223372036854775808"));
+		}
+		nb = nb * -write(1, "-", 1);
 	}
+	else if (plus)
+		write(1, "+", 1);
+	if (nb > 9)
+		ft_putnbrl(nb / 10, 0, 0);
+	ft_putchar('0' + nb % 10);
+	/*while (i-- > 1)
+	  {
+	  print_bit(((char *)nb)[i]);
+	  if (i != 1)
+	  write(1, " ",1);
+	  }*/
 	/*short exponent;
-	long fraction;
-	int signe;
-	
-	exponent = ((short*)nb)[1];
-	if (exponent < 0)
-		signe = -1;
-	exponent = ft_abs((long)exponent);
-	print_bit(exponent);
+	  long fraction;
+	  int signe;
+
+	  exponent = ((short*)nb)[1];
+	  if (exponent < 0)
+	  signe = -1;
+	  exponent = ft_abs((long)exponent);
+	  print_bit(exponent);
 	//exponent = 0b0111111111110000 & exponent;
 	fraction = ((long*)nb)[1];
 	write(1, " ",1);
@@ -74,7 +86,7 @@ void    ft_putfloat(void *nb, int precision, int plus)
 
 int main()
 {
-	long double nbr = /*LDBL_MAX*/LDBL_MAX;
+	long double nbr = 0.5;
 
 	ft_putfloat((void*)&nbr,0,0);
 	return (0);
@@ -83,33 +95,33 @@ int main()
 #include <float.h>
 int main()
 {
-	float aboat = 32000.0;
-	double abet = 5.32e-5;
-	long double dip = 5.32e-5;
+float aboat = 32000.0;
+double abet = 5.32e-5;
+long double dip = 5.32e-5;
 
-	printf("(long)aboat -> %ld", (long)aboat);
-	ft_putfloat(aboat, 6, 0, 0);
-	ft_putendl("");
-	ft_putfloat(abet,6,0,0);
-	ft_putendl("");
-	ft_putfloat(dip,6,0,0);
-	ft_putendl("");
-	return (0);
+printf("(long)aboat -> %ld", (long)aboat);
+ft_putfloat(aboat, 6, 0, 0);
+ft_putendl("");
+ft_putfloat(abet,6,0,0);
+ft_putendl("");
+ft_putfloat(dip,6,0,0);
+ft_putendl("");
+return (0);
 }*/
 /*
 #include <stdio.h>
 
 int main(void)
 {
-	float aboat = 32000.0;
-	double abet = 5.32e-5;
-	long double dip = 5.32e-5;
+float aboat = 32000.0;
+double abet = 5.32e-5;
+long double dip = 5.32e-5;
 
-	printf("%f\n", aboat);
-	printf("%lf\n", abet);
-	printf("%Lf\n", dip);
+printf("%f\n", aboat);
+printf("%lf\n", abet);
+printf("%Lf\n", dip);
 
-	return 0;
+return 0;
 }*/
 /*int print_f(va_list ap, t_conv conv)
   {

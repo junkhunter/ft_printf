@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 21:43:32 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/28 03:10:02 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/11 23:32:17 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int main(int argc, char **argv)
 	//printf("%.0s" , "bonjour");
 	//ft_printf("@moulitest: %5.o %5.0o", 0, 0);
 	//printf("ret -> %d\n", ft_printf("le mien -> %05c\n", 'a'));
-	printf("size  -> %d\n", printf("%.50Lf", LDBL_MAX / (long double)pow(10, 50)));
-	10151230354136153512.0 / 10
+	printf("%#.-5o\n", 0);
+	ft_printf("%#.-5o\n", 0);
 	//ft_putnbr(33);
 	//printf ("%b\n",1);
 	return(0);

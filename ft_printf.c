@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 22:11:52 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/27 20:22:33 by rhunders         ###   ########.fr       */
+/*   Created: 2018/12/18 22:31:11 by rhunders          #+#    #+#             */
+/*   Updated: 2018/12/19 02:13:45 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include "include/printf.h"
 #include <unistd.h>
+#include "g_flag_array.h"
 
 void	error()
 {
@@ -29,14 +30,16 @@ int		ft_isnum(char c)
 int		ft_printf(const char *arg, ...)
 {
 	int				run;
-	t_flag_array	*flag_array;
+//	t_flag_array	*flag_array;
 	va_list			ap;
 
-	flag_array = create_flag_array();
+	if (!arg)
+		return (0);
+//	flag_array = create_flag_array();
 	va_start(ap, arg);
 	run = printf_recurs((char *)arg, ap, flag_array);
 	va_end(ap);
-	free(flag_array);
+//	free(flag_array);
 	return (run);
 }
 //#include <stdio.h>
@@ -46,10 +49,12 @@ int		ft_precision(char **arg, t_conv *conv)
 	if (ft_isnum((*arg)[1]))
 	{
 		conv->precision = ft_atoi((*arg) + 1);
+		if (conv->precision == 1)
+			conv->one = 1;
 		return (nb_len(conv->precision, 10));
 	}
-	else
-		return ((conv->precision = 0));
+	//conv->dot = 1;
+	return ((conv->precision = 0));
 }
 
 void	create_conv(char **arg, t_conv *conv)
@@ -80,11 +85,10 @@ int		check_valid_flag(char **arg, t_conv *conv, t_flag_array *flag_array, int si
 	int i;
 
 	i = -1;
-	count = -1;
 	conv->index = -1;
-	while (++i < size)
-		while (++count < NUMBER_OF_FLAG || !(count = -1))
-			if ((*arg)[i] == flag_array[count].flagChar)
+	while (++i < size && (count = -1))
+		while (++count < NUMBER_OF_FLAG)
+			if ((*arg)[i] == flag_array[count].flag_char)
 			{
 				conv->index = count;
 				conv->precision = -1;
@@ -99,7 +103,33 @@ int		ft_ischar_flag(char arg)
 	return (arg && ft_strchr("#. -+0123456789hl", arg));
 }
 
+int		dot(t_conv conv, int modif_w)
+{
+	int		ret;
 
+	conv.width = conv.width - modif_w;
+	ret = (conv.width < 0) ? 0: conv.width;
+	if (conv.sharp && flag_array[conv.index].flag_char == 'o')
+	{
+		if (conv.minus)
+			write(1, "0", 1);
+		if (conv.width > (ret += !ret))
+			ft_width(1, &conv);
+		if (!conv.minus)
+			write(1, "0", 1);
+	}
+	else if (ret)
+	{
+		if (conv.plus && (flag_array[conv.index].flag_char == 'd' ||
+			flag_array[conv.index].flag_char == 'i') && conv.minus)
+			write(1, "+", 1);
+		ft_width(0, &conv);
+		if (conv.plus && (flag_array[conv.index].flag_char == 'd' ||
+			flag_array[conv.index].flag_char == 'i') && !conv.minus)
+			write(1, "+", 1);
+	}
+	return (ret);
+}
 
 int		search_flag(va_list ap, char **arg, t_flag_array *flag_array)
 {
@@ -140,12 +170,12 @@ int		printf_recurs(char *arg, va_list ap, t_flag_array *flag_array)
 t_flag_array	*create_flag_array(void)
 {
 	t_flag_array *flag_array = malloc(sizeof(t_flag_array) * NUMBER_OF_FLAG);
-	char *allFlags = "dcsoxXiupf%";
+	char *all_flags = "dcsoxXiupf%";
 	int index;
 
 	index = -1;
 	while (++index < NUMBER_OF_FLAG)
-		flag_array[index].flagChar = allFlags[index];
+		flag_array[index].flag_char = all_flags[index];
 	flag_array[0].function = print_di;
 	flag_array[1].function = print_c;
 	flag_array[2].function = print_s;

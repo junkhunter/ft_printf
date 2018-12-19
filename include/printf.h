@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:54:02 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/28 01:13:05 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/19 02:08:35 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,28 @@
 # define H  2
 # define LL 3
 # define L  4
+# define L_MAJ  5
 #include "libft.h"
 #include <stdarg.h>
 
 typedef struct	s_conv
 {
-	int			sharp;
-	int			space;
-	int			zero;
-	int			minus;
-	int			plus;
-	int			width;
-	int			precision;
-	int			size;
-	int			index;
-	int			modifier;
+	char			sharp;
+	char			space;
+	char			zero;
+	char			minus;
+	char			plus;
+	int				width;
+	int				precision;
+	int				one;
+	char			size;
+	int				index;
+	char			modifier;
 }				t_conv;
 
 typedef struct	s_flag_array
 {
-    char		flagChar;
+    char		flag_char;
     int 		(*function)(va_list, t_conv);
 }				t_flag_array;
 
@@ -61,16 +63,17 @@ void			binary_converter(int input);
 
 /* outils */
 int     ft_bigger(int val1, int val2);
-void    ft_width(int size_input, t_conv conv);
+void    ft_width(int size_input, t_conv *conv);
 long    ft_abs(long nb);
 int		nb_len(long nb, int base);
 int     nb_ulen(unsigned long nb, int base);
-
+int     dot(t_conv conv, int modif_w);
 
 /* va_arg */
 long			va_arg_di(va_list ap, t_conv conv);
 unsigned long	va_arg_oux(va_list ap, t_conv conv);
 long double		va_arg_f(va_list, t_conv conv);
+
 
 /*
 int special_case_check (char *arg, int index);

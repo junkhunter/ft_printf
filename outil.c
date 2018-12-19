@@ -6,29 +6,40 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:26:24 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/27 20:24:50 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/19 01:11:42 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/printf.h"
 #include <limits.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int     ft_bigger(int val1, int val2)
 {
 	return ((val1 > val2) ? val1 : val2);
 }
 
-void    ft_width(int size_input, t_conv conv)
+void    ft_width(int size_input, t_conv *conv)
 {
-	char c;
+	char	c;
+	int		c_width;
+	char	*str;
 
-	if (!conv.minus && conv.precision == 1)
-		c = (!conv.zero) ? ' ' : '0';
+	c_width = conv->width - size_input;
+	if (c_width > 0)
+		str = malloc(sizeof(char) * c_width + 1);
+	else
+		return ;
+	str[c_width] = 0;
+	if (!conv->minus && conv->precision == 1 && !conv->one)
+		c = (!conv->zero) ? ' ' : '0';
 	else
 		c = ' ';
-	while (conv.width-- > size_input)
-		ft_putchar(c);
+	ft_memset(str, c, c_width);
+	write(1, str, c_width);
+//	ft_putstr(str);
+	free(str);
 }
 
 long    ft_abs(long nb)
