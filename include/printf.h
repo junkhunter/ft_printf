@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:54:02 by rhunders          #+#    #+#             */
-/*   Updated: 2018/12/19 02:08:35 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:23:04 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 # define LL 3
 # define L  4
 # define L_MAJ  5
+# define D  0
+# define C  1
+# define S  2
+# define O  3
+# define I  4
+# define U  5
+# define X_LOW  6
+# define X_UP  7
+# define P  8
+# define F  9
+# define PERC  10
 #include "libft.h"
 #include <stdarg.h>
 
@@ -58,6 +69,8 @@ int				print_x_up(va_list ap, t_conv conv);
 int				print_u(va_list ap, t_conv conv);
 int				print_p(va_list ap, t_conv conv);
 int				print_percent(va_list ap, t_conv conv);
+int				print_f(va_list ap, t_conv conv);
+char			*ft_ltoa(long nb);
 void			ft_putnbrlu_base(unsigned long nb, int precision, char *digit, int base);
 void			binary_converter(int input);
 

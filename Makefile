@@ -6,7 +6,7 @@
 #    By: rhunders <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 20:45:42 by rhunders          #+#    #+#              #
-#    Updated: 2018/12/04 04:08:54 by rhunders         ###   ########.fr        #
+#    Updated: 2018/12/20 00:35:50 by rhunders         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC	=	ft_printf.c \
 		ft_select_arg.c \
 		outil.c \
 		print_diu.c \
+		print_f.c \
 		print_ox.c \
 		print_sbc.c \
 		print_percent.c \

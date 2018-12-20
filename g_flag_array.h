@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 15:25:53 by rhunders          #+#    #+#             */
-/*   Updated: 2018/12/18 22:01:23 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:19:20 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_flag_array    flag_array[11] =
 	{'x', print_x_low},
 	{'X', print_x_up},
 	{'p', print_p},
-	{'f', NULL},
+	{'f', print_f},
 	{'%', print_percent},
 };
 #endif

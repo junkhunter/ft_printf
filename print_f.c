@@ -1,47 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   print_f.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/25 04:14:51 by rhunders          #+#    #+#             */
-/*   Updated: 2018/12/14 00:17:52 by rhunders         ###   ########.fr       */
+/*   Created: 2018/12/20 00:25:29 by rhunders          #+#    #+#             */
+/*   Updated: 2018/12/20 01:35:40 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/printf.h"
 #include <limits.h>
 #include <unistd.h>
-
-int		float_len(long double nb)
-{
-	int i;
-	long long floor;
-	long double nbr;
-
-	nbr = nb;
-	floor = (long long)nb;
-	while (nb > 0)
-	{
-		nb /= 10;
-		i++;
-	}
-	nbr -= floor; 
-	while (nbr - (long long)nbr != 0)
-	{
-		nbr /= 10;
-		i++;
-	}
-	return (i);
-}
-
+#include <stdio.h>
+/*
 void	print_bit(char nb)
 {
 	char i = 8;
 
 	while (i-- > 0)
 		write(1, (nb & (1 << i) ? "1":"0"), 1);
+}
+*/
+int		ft_pow(int nb, int exp)
+{
+	return ((!exp) ? 1: nb * ft_pow(nb, exp - 1));
+}
+
+int		rond_nbr(long double nb, int prec, char **comas)
+{
+//	long debut;
+	long floor;
+
+	floor = (long)nb;
+	nb -= (long double)floor;
+	*comas = ft_strnew(prec);
+	nb *= ft_pow(10, prec + 1);
+	floor = (long)nb;
+	ft_memset(*comas, '0', prec);
+	if (floor % 10 >= 5)
+	{
+		//debut = nb_len(floor, 10);
+	//	printf("%d\n", *floor);
+		floor -= floor % 10;
+		floor += 10;
+	//	printf("%d\n", *floor);
+		if (prec + 1 < nb_len(floor, 10))
+			return (1);
+	}
+	floor /= 10;
+	while (floor)
+	{
+		comas[0][--prec] = floor % 10 + '0';
+		floor /= 10;
+	}
+	return (0);
 }
 
 void    ft_putlong(long nb)
@@ -55,42 +69,61 @@ void    ft_putlong(long nb)
 		}
 		nb = nb * -write(1, "-", 1);
 	}
-	else if (plus)
-		write(1, "+", 1);
 	if (nb > 9)
-		ft_putnbrl(nb / 10, 0, 0);
+		ft_putlong(nb / 10);
 	ft_putchar('0' + nb % 10);
-	/*while (i-- > 1)
-	  {
-	  print_bit(((char *)nb)[i]);
-	  if (i != 1)
-	  write(1, " ",1);
-	  }*/
-	/*short exponent;
-	  long fraction;
-	  int signe;
-
-	  exponent = ((short*)nb)[1];
-	  if (exponent < 0)
-	  signe = -1;
-	  exponent = ft_abs((long)exponent);
-	  print_bit(exponent);
-	//exponent = 0b0111111111110000 & exponent;
-	fraction = ((long*)nb)[1];
-	write(1, " ",1);
-	print_bit(fraction);*/
 }
 
+void	ft_putfloat(char *comas, long floor, t_conv conv, int flag)
+{
+	ft_putlong(floor);
+	if (conv.precision)
+		ft_putchar('.');
+	if (!flag && conv.precision)
+		ft_putstr(comas);
+	else if (conv.precision)
+		while (conv.precision--)
+			ft_putstr(comas);
+}
+
+int		print_f(va_list ap, t_conv conv)
+{
+	long double nb;
+	char		*comas;
+	int			ret;
+	int			flag;
+
+	(conv.precision == -1) ? conv.precision = 6: 0;
+	nb = va_arg_f(ap, conv);
+	if ((flag = rond_nbr(nb, conv.precision, &comas)))
+		nb += 1.0;
+	ret = nb_ulen((long)nb, 10) + conv.precision + !!conv.precision;
+	if (conv.minus)
+	{
+		ft_putfloat(comas, (long)nb, conv, flag);
+		ft_width(ret, &conv);
+	}
+	else
+	{
+		ft_width(ret, &conv);
+		ft_putfloat(comas, (long)nb, conv, flag);
+	}
+	return (ft_bigger(ret, conv.width));
+}
+
+/*
 #include <limits.h>
 #include <float.h>
 
 int main()
 {
-	long double nbr = 0.5;
-
-	ft_putfloat((void*)&nbr,0,0);
+	long double nbr = 0.9999999999;
+	
+	t_conv conv;
+	conv.precision = 7;
+	print_f(nbr, conv);
 	return (0);
-}/*
+}*//*
 #include <limits.h>
 #include <float.h>
 int main()

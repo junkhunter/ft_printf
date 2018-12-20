@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:26:24 by rhunders          #+#    #+#             */
-/*   Updated: 2018/12/19 01:11:42 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:37:50 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    ft_width(int size_input, t_conv *conv)
 	else
 		return ;
 	str[c_width] = 0;
-	if (!conv->minus && conv->precision == 1 && !conv->one)
+	if (!conv->minus && ((conv->precision == 1 && !conv->one) || conv->index == F))
 		c = (!conv->zero) ? ' ' : '0';
 	else
 		c = ' ';

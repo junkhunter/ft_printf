@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 22:38:00 by rhunders          #+#    #+#             */
-/*   Updated: 2018/12/19 01:47:02 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/20 00:54:48 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ char	*ft_ltoa(long nb)
 		signe = 1;
 	}
 	index += nb_len(nb, 10);
-	str[index + 1] = 0;
-	while (index > signe)
+	str[index] = 0;
+	while (index >= signe)
+	{
 		str[index--] = nb % 10 + '0';
+		nb /= 10;
+	}
 	return (ft_strdup(str));
 }
 
@@ -61,7 +64,7 @@ void    ft_putnbrl(long nb, int precision, int plus)
 			ft_make_precision(19, precision);
 			return (ft_putstr("9223372036854775808"));
 		}
-		nb = nb * -write(1, "-", 1);
+		nb *= -write(1, "-", 1);
 	}
 	else if (plus)
 		write(1, "+", 1);
@@ -104,7 +107,7 @@ int print_di(va_list ap, t_conv conv)
 		return (dot(conv, conv.plus));
 	ret = ft_bigger(nb_len(nb, 10), conv.precision) +
 		(nb < 0 || conv.space || conv.plus);
-	if ((nb < 0 || conv.space || conv.plus) && conv.zero)
+	if ((nb < 0 || conv.space || (conv.plus && conv.precision == 1 && !conv.one)) && conv.zero)
 	{
 		if ((conv.plus && nb >= 0) || conv.space)
 			conv.plus = write(1, (conv.plus) ? "+" : " ", 1) - 1;
