@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   converter_flagfunctions.c                          :+:      :+:    :+:   */
+/*   invalid_conv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 20:53:47 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/27 19:33:10 by rhunders         ###   ########.fr       */
+/*   Created: 2019/01/11 10:35:22 by rhunders          #+#    #+#             */
+/*   Updated: 2019/01/11 11:28:39 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "printf.h"
+#include <unistd.h>
 #include <stdlib.h>
-#include <limits.h>
 
-void	binary_converter(int input)
+int	invalid_conversion(char **arg, t_conv conv)
 {
-	int i;
+	char *str;
 
-	i = 64;
-	while (i-- > 0)
+	if (conv.width > 1)
 	{
-		if (!((i + 1) % 8) && i < 63)
-			ft_putchar(' ');
-		ft_putchar((input & (1 << i)) ? '1' : '0');
+		if (**arg && conv.minus)
+			*arg += write(1, *arg, 1);
+		str = (char*)malloc(sizeof(char) * conv.width - 1);
+		ft_memset(str, ' ', conv.width - 1);
+		write(1, str, conv.width - 1);
+		free(str);
+		if (**arg && !conv.minus)
+			*arg += write(1, *arg, 1);
+		return (conv.width - !**arg);
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 22:38:00 by rhunders          #+#    #+#             */
-/*   Updated: 2018/12/20 00:54:48 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/20 02:52:25 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,12 @@ void	ft_make_precision(int size_input, int precision)
 		return ;
 	str = malloc(size + 1);
 	str[size] = 0;
-	ft_memset(str, '0', size );
+	ft_memset(str, '0', size);
 	write(1, str, size);
 	free(str);
 }
 
-char	*ft_ltoa(long nb)
-{
-	char	str[19];
-	int		index;
-	int		signe;
-
-	index = 0;
-	signe = 0;
-	if (nb < 0 && (str[0] = '-'))
-	{
-		if (nb == LONG_MIN)
-			return (ft_strdup("-9223372036854775808"));
-		index = 1;
-		signe = 1;
-	}
-	index += nb_len(nb, 10);
-	str[index] = 0;
-	while (index >= signe)
-	{
-		str[index--] = nb % 10 + '0';
-		nb /= 10;
-	}
-	return (ft_strdup(str));
-}
-
-void    ft_putnbrl(long nb, int precision, int plus)
+void	ft_putnbrl(long nb, int precision, int plus)
 {
 	if (nb < 0)
 	{
@@ -75,39 +50,18 @@ void    ft_putnbrl(long nb, int precision, int plus)
 	ft_putchar('0' + nb % 10);
 }
 
-char	*ft_strjoin_free(char *str1, char *str2)
+int		print_di(va_list ap, t_conv conv)
 {
-	char *str3;
-	
-	str3 = ft_strjoin(str1, str2);
-	free(str1);
-	free(str2);
-	return (str3);
-}
+	long	nb;
+	int		ret;
 
-/*void    ft_putnbrl(long nb, int precision, int plus)
-{
-	char *str;
-
-	str = ft_ltoa(nb);
-	if (precision)
-		str = ft_strjoin_free(ft_make_precision(ft_strlen(str), precision), str);
-	if (plus && nb > 0)
-		ft_strjoin_free(ft_strdup("+"), str);
-	ft_putstr()
-}*/
-
-int print_di(va_list ap, t_conv conv)
-{
-	long nb;
-	int ret;
-
-	(conv.precision == -1) ? conv.precision = 1: 1;
+	(conv.precision == -1) ? conv.precision = 1 : 1;
 	if (!(nb = va_arg_di(ap, conv)) && !conv.precision)
 		return (dot(conv, conv.plus));
 	ret = ft_bigger(nb_len(nb, 10), conv.precision) +
 		(nb < 0 || conv.space || conv.plus);
-	if ((nb < 0 || conv.space || (conv.plus && conv.precision == 1 && !conv.one)) && conv.zero)
+	if ((nb < 0 || conv.space ||
+		(conv.plus && conv.precision == 1 && !conv.one)) && conv.zero)
 	{
 		if ((conv.plus && nb >= 0) || conv.space)
 			conv.plus = write(1, (conv.plus) ? "+" : " ", 1) - 1;
@@ -125,10 +79,8 @@ int print_di(va_list ap, t_conv conv)
 	return (ft_bigger(ret, conv.width));
 }
 
-void    ft_putnbrlu(unsigned long nb, int precision)
+void	ft_putnbrlu(unsigned long nb, int precision)
 {
-	//while (precision && precision-- > nb_len(nb, 10))
-	//	ft_putchar('0');
 	if (precision)
 		ft_make_precision(nb_ulen(nb, 10), precision);
 	if (nb > 9)
@@ -136,12 +88,12 @@ void    ft_putnbrlu(unsigned long nb, int precision)
 	ft_putchar('0' + nb % 10);
 }
 
-int	print_u(va_list ap, t_conv conv)
+int		print_u(va_list ap, t_conv conv)
 {
-	unsigned long nb;
-	int ret;
+	unsigned long	nb;
+	int				ret;
 
-	(conv.precision == -1) ? conv.precision = 1: 1;
+	(conv.precision == -1) ? conv.precision = 1 : 1;
 	if (!(nb = va_arg_oux(ap, conv)) && !conv.precision)
 		return (dot(conv, 0));
 	ret = ft_bigger(nb_ulen(nb, 10), conv.precision);
@@ -152,20 +104,3 @@ int	print_u(va_list ap, t_conv conv)
 		ft_putnbrlu(nb, conv.precision);
 	return (ft_bigger(ret, conv.width));
 }
-/*
-#include <limits.h>
-
-int	main()
-{
-	t_conv conv;
-
-	conv.zero = 1;
-	conv.space = 1;
-	conv.minus = 0;
-	conv.plus = 0;
-	conv.precision = 4;
-	conv.width = 8;
-
-	printf("\nret = %d\n", print_u(100, conv));
-	return (1);
-}*/

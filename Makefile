@@ -6,7 +6,7 @@
 #    By: rhunders <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 20:45:42 by rhunders          #+#    #+#              #
-#    Updated: 2018/12/20 00:35:50 by rhunders         ###   ########.fr        #
+#    Updated: 2019/01/11 11:30:40 by rhunders         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,14 @@ LIBFT = $(addprefix libft/, $(LIBFT_SRC))
 SRC	=	ft_printf.c \
 		ft_select_arg.c \
 		outil.c \
+		outil_2.c \
+		outil_3.c \
 		print_diu.c \
 		print_f.c \
 		print_ox.c \
 		print_sbc.c \
 		print_percent.c \
-		converter_flagfunctions.c 
+		invalid_conv.c
 
 OBJ	= $(SRC:.c=.o) $(LIBFT_SRC:.c=.o)
 

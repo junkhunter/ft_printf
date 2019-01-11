@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 17:26:24 by rhunders          #+#    #+#             */
-/*   Updated: 2018/12/20 01:37:50 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/12/20 03:24:19 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int     ft_bigger(int val1, int val2)
+int		ft_bigger(int val1, int val2)
 {
 	return ((val1 > val2) ? val1 : val2);
 }
 
-void    ft_width(int size_input, t_conv *conv)
+void	ft_width(int size_input, t_conv *conv)
 {
 	char	c;
 	int		c_width;
@@ -32,22 +32,22 @@ void    ft_width(int size_input, t_conv *conv)
 	else
 		return ;
 	str[c_width] = 0;
-	if (!conv->minus && ((conv->precision == 1 && !conv->one) || conv->index == F))
+	if (!conv->minus &&
+		((conv->precision == 1 && !conv->one) || conv->index == F))
 		c = (!conv->zero) ? ' ' : '0';
 	else
 		c = ' ';
 	ft_memset(str, c, c_width);
 	write(1, str, c_width);
-//	ft_putstr(str);
 	free(str);
 }
 
-long    ft_abs(long nb)
+long	ft_abs(long nb)
 {
 	return ((nb < 0) ? -nb : nb);
 }
 
-int nb_len(long nb, int base)
+int		nb_len(long nb, int base)
 {
 	int i;
 	int signe;
@@ -56,7 +56,7 @@ int nb_len(long nb, int base)
 		return (1);
 	if (nb < 0)
 		signe = 1;
-	else 
+	else
 		signe = 0;
 	while (nb > 0 || (nb < 0 && signe))
 	{
@@ -66,7 +66,7 @@ int nb_len(long nb, int base)
 	return (i);
 }
 
-int nb_ulen(unsigned long nb, int base)
+int		nb_ulen(unsigned long nb, int base)
 {
 	int i;
 

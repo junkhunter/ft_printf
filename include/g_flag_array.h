@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_display.c                                :+:      :+:    :+:   */
+/*   g_flag_array.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 00:00:22 by rhunders          #+#    #+#             */
-/*   Updated: 2018/11/22 22:35:23 by rhunders         ###   ########.fr       */
+/*   Created: 2018/11/28 15:25:53 by rhunders          #+#    #+#             */
+/*   Updated: 2019/01/11 11:30:27 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "include/printf.h"
+#ifndef G_FLAG_ARRAY_H
+# define G_FLAG_ARRAY_H
+# include "printf.h"
 
-void ft_put_octal(int nb)
+t_flag_array	g_flag_array[14] =
 {
-	int zero_number;
-	int index;
+	{'d', print_di},
+	{'c', print_c},
+	{'s', print_s},
+	{'o', print_o},
+	{'i', print_di},
+	{'u', print_u},
+	{'x', print_x_low},
+	{'X', print_x_up},
+	{'p', print_p},
+	{'f', print_f},
+	{'F', print_f},
+	{'%', print_percent},
+	{'O', print_o},
+	{'U', print_u}
+};
 
-	index = 0;
-	zero_number = 2;
-	if (nb > 7)
-		zero_number = (nb > 77) ? 0 : 1;
-	ft_putchar(92);
-	while (index++ < zero_number)
-		ft_putchar('0');
-	ft_putnbr(nb);
-}
+#endif
