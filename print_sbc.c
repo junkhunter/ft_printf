@@ -6,12 +6,12 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 21:24:12 by rhunders          #+#    #+#             */
-/*   Updated: 2019/01/11 11:29:41 by rhunders         ###   ########.fr       */
+/*   Updated: 2019/01/14 08:47:04 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "include/printf.h"
+#include "printf.h"
 #include "libft.h"
 
 int	ft_smaller(int val1, int val2)

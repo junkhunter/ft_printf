@@ -6,13 +6,13 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 22:31:11 by rhunders          #+#    #+#             */
-/*   Updated: 2019/01/11 11:29:03 by rhunders         ###   ########.fr       */
+/*   Updated: 2019/01/14 08:45:28 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdlib.h>
-#include "include/printf.h"
+#include "printf.h"
 #include <unistd.h>
 #include "g_flag_array.h"
 
@@ -20,11 +20,16 @@ int		ft_printf(const char *arg, ...)
 {
 	int				ret;
 	va_list			ap;
+	char			*str;
+	char			*buff;
 
 	if (!arg)
 		return (0);
 	va_start(ap, arg);
-	ret = printf_recurs((char *)arg, ap);
+	str = ft_strdup(arg);
+	buff = str;
+	ret = printf_recurs(buff, ap);
+	free(str);
 	va_end(ap);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 20:54:02 by rhunders          #+#    #+#             */
-/*   Updated: 2019/01/11 11:20:57 by rhunders         ###   ########.fr       */
+/*   Updated: 2019/01/14 08:40:14 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 # define NUMBER_OF_FLAG 14
 # define HH 1
 # define H  2
-# define LL 3
-# define L  4
-# define L_MAJ  5
-# define J	6
+# define J	3
+# define LL 4
+# define L  5
+# define L_MAJ  6
 # define Z	7
 # define D  0
 # define C  1
